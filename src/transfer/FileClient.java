@@ -27,7 +27,7 @@ public class FileClient {
         catch (Exception e) {e.printStackTrace();} }
 
     public static void main(String[] args) {
-        File f = new File("c:\\gdrive\\rhcp.mp3");
+        File f = new File("c:\\gdrive\\train.wav");
         new FileClient(f);
     }
 }

@@ -1,14 +1,12 @@
 package transfer;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class FileServer {
 
-    final String folderPath= "c:\\gdrive\\";
+    final String folderPath= "c:\\music\\";
 
     public FileServer() {
         try {
@@ -18,11 +16,18 @@ public class FileServer {
             File f = (File) ois.readObject();
             File destination = new File(folderPath + f.getName());
             save(destination, s.getInputStream(), f.length());
+            ois.close();
             s.close();
             ss.close(); }
         catch (Exception e) {e.printStackTrace();} }
 
-    private void save(File f, InputStream is, long fileSize) {}
+    private void save(File f, InputStream is, long fileSize) {
+        try {
+            FileOutputStream fos = new FileOutputStream(f);
+            int i;
+            while ((i = is.read()) > -1) {fos.write(i);}
+        fos.close(); }
+        catch (Exception e) {e.printStackTrace();} }
 
     public static void main(String[] args) {
         new FileServer();
