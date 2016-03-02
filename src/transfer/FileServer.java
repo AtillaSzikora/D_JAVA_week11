@@ -25,7 +25,8 @@ public class FileServer {
         try {
             FileOutputStream fos = new FileOutputStream(f);
             int i;
-            while ((i = is.read()) > -1) {fos.write(i);}
+            byte[] buffer = new byte[4096];
+            while ((i = is.read(buffer)) > -1) {fos.write(buffer);}
         fos.close(); }
         catch (Exception e) {e.printStackTrace();} }
 
